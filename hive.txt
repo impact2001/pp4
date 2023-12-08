@@ -1,0 +1,18 @@
+1)su hdoop
+2)cd usr/local
+3)wget https://downloads.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz
+4)tar xvzf apache-hive-3.1.2-bin.tar.gz
+5)nano .bashrc
+6)export HIVE_HOME=/usr/local/hive
+export PATH=$PATH:$HIVE_HOME/bin
+7)source .bashrc
+8)hdfs dfs -mkdir /tmp
+9)hdfs dfs -chmod g+w /tmp
+10)hdfs dfs -mkdir -p /user/hive/warehouse
+11)hdfs dfs -chmod g+w /user/hive/warehouse
+12)cd /usr/local/hive/bin
+13)ls $HIVE_HOME/lib
+14)rm $HIVE_HOME/lib/guava-19.0.jar
+15)schematool -initSchema -dbType derby
+16)hiveserver2
+17)beeline -n hadoop -u jdbc:hive2://localhost:10000

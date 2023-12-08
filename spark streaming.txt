@@ -1,0 +1,52 @@
+1. open ubantu >> open terminal 
+2. in hadoop user create one folder named as "text" with cd commnad
+3. (under /opt/spark create one file name as 'NetworkWordCount.scala'in test folder ) 
+	nano NetworkWordCount.scala
+4. 
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming._
+object NetworkWordCount {
+def main(args: Array[String]): Uint = {
+val SparkConf = new
+SparkConf().setMaster("local[2]")setAppName("NetworkWordCount")
+val ssc = new StreamingContext(sparkConf, Seconds(10))
+val lines = ssc.socketTextStream("localhost",9999)
+val words = lines.flatMap(_.split(" "))
+val tuples = words.map(word => (word ,1))
+val wordCounts = tuples.reduceByKey((t, v) => t + v)
+wordCounts.print()
+ssc.start()
+ssc.awaitTermination()
+
+}
+}
+
+5. Create a ‘networkwordcount.sbt’ file in the same folder
+6. under /opt/spark 
+	nano networkwordcount.sbt
+
+save 
+
+7.
+name:="networkwordcount"
+version :=1.7.9
+scalaVersion := "2.11.12"
+libraryDependencies += "org.apache.spark" % "spark-streaming_2.12">"provided"
+
+save
+
+8. under root type 
+9. cd sbin
+10. sbt package
+11. ./start-master.sh
+
+12. open new terminal and start netscape server
+	nc -lk 9999
+13. in original terminal submit the scala program to check 
+	under /opt/spark/bin type 
+	./spark-submit --class 'NetworkWordCount' --master
+
+
+14. On the netscape terminal provide textual input for the scala program to count words of the live stream every 10 seconds
+	
+	

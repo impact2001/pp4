@@ -1,0 +1,7 @@
+1)sudo apt-get update
+2)sudo apt install scala
+3)sudo apt-get install sbt
+4)cd opt/spark/sbin
+5)./start-master.sh
+6)in another terminal, cd opt/spark
+7) sudo sbt package

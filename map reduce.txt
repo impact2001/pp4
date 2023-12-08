@@ -1,0 +1,20 @@
+1)su hdoop
+2)cd ..
+3)cd ..
+4)cd hdoop
+5)sudo nano input.txt
+6)she sells seashells on the seashore the shells are seashells
+7)sudo nano wordcount.py
+8)from pyspark.sql import SparkSession
+spark=SparkSession.builder.appName("WordCount").getOrCreate()
+text_data =spark.read.text("/home/hdoop/input.txt")
+from pyspark.sql.functions import split, explode
+words = text_data.select(explode(split(text_data.value, " ")).alias("word"))
+word_counts = words.groupBy("word").count()
+word_counts.show()
+word_counts.write.csv("/home/hdoop/word_count_results.csv")
+spark.stop()
+9)start-master.sh
+10)start-yarn.sh
+11)start-dfs.sh
+12)spark-submit wordcount.py

@@ -1,0 +1,14 @@
+1)su hdoop
+2)sudo mkdir /usr/local/pig
+2)wget http://www.apache.org/dist/pig/pig-0.16.0/pig-0.16.0.tar.gz
+3)tar xvzf pig-0.16.0.tar.gz
+5)cd pig-0.16.0/
+7)nano .bashrc
+8)export PIG_HOME=/usr/local/pig
+export PATH=$PATH:$PIG_HOME/bin
+8)source .bashrc
+9)sudo apt-get remove bsdgames
+10)sudo apt-get remove --auto-remove bsdgames
+11)sudo apt-get purge bsdgames
+12)sudo apt-get purge --auto-remove bsdgames
+13)pig
